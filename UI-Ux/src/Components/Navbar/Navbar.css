@@ -1,0 +1,87 @@
+/* Existing styles... */
+nav {
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 0;
+  z-index: 1000;
+  padding-right: 25px;
+}
+
+
+/* Rest of your styles stay the same... */
+.nav-links {
+  list-style: none;
+  display: flex;
+  background: transparent;
+  font-size: 20px;
+  gap: 30px;
+  padding-left: 35%;
+  font-family: Arial, sans-serif;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+  color: #ea1538;
+}
+
+.sign-in-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #ea1538;
+  color: white;
+  border: none;
+  padding: 9px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.sign-in-btn:hover {
+  background-color: #ff4e5e;
+}
+.logo-image {
+  height: 60px;
+  width: auto;
+  image-rendering: crisp-edges;
+  padding-left: 20px;
+  animation: float 3s ease-in-out infinite;
+}
+.logo-image{
+  width: 200px;
+  height: 40px;
+}
+.logo-btn{
+  cursor: pointer;
+}
+.cart-icon {
+  width: 35px;
+  height: 35px;
+  object-fit: contain;
+  padding-right: 10px;
+  padding-bottom: 5px;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.cart-icon:hover {
+  transform: scale(1.1);
+}
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
