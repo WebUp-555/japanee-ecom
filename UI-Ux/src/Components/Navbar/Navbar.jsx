@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FaSignInAlt } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import LogoutButton from "./LogoutButton.jsx";
@@ -7,13 +7,30 @@ import "./Navbar.css";
 
 const Navbar = () => {
   // Categories removed from navbar per request.
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const location = useLocation();
   const isActive = (path) => location.pathname === path;
 
+  useEffect(() => {
+    // Check if user is logged in
+    const token = localStorage.getItem("token") || localStorage.getItem("accessToken");
+    setIsLoggedIn(!!token);
+
+    // Listen for storage changes (login/logout from other tabs)
+    const handleStorageChange = () => {
+      const token = localStorage.getItem("token") || localStorage.getItem("accessToken");
+      setIsLoggedIn(!!token);
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, []);
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    setIsLoggedIn(false);
     window.location.href = "/signin";
   };
 
@@ -50,12 +67,14 @@ const Navbar = () => {
       </ul>
       
       <div className="navbar-right">
-        <Link to="/signin">
-          <button className="sign-in-btn">
-            <FaSignInAlt style={{ marginRight: "8px" }} />
-            Sign In
-          </button>
-        </Link>
+        {!isLoggedIn && (
+          <Link to="/signin">
+            <button className="sign-in-btn">
+              <FaSignInAlt style={{ marginRight: "8px" }} />
+              Sign In
+            </button>
+          </Link>
+        )}
         <LogoutButton />
       </div>
     </nav>

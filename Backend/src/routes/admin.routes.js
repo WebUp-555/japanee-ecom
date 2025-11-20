@@ -26,5 +26,6 @@ router.delete("/deleteproduct/:id", verifyJWT, requireAdmin, deleteProduct);
 
 // ============ CATEGORY ROUTES ============
 router.post("/addcategory", verifyJWT, requireAdmin, addCategory);
+router.get("/categories", verifyJWT, requireAdmin, getAllCategories);
 
 export default router;

@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { addProduct, getAllCategories } from '../utils/api';
-import axios from 'axios';
 
 export default function AddProduct() {
   const navigate = useNavigate();
@@ -13,7 +12,7 @@ export default function AddProduct() {
     stock: "",
     image: null
   });
-  const [categories, setCategories] = useState([]); // Initialize as empty array
+  const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
@@ -21,12 +20,11 @@ export default function AddProduct() {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/categories`);
-        // Make sure to extract the array properly
-        setCategories(response.data?.categories || response.data || []);
+        const response = await getAllCategories();
+        setCategories(response?.categories || response?.data || []);
       } catch (error) {
         console.error('Error fetching categories:', error);
-        setCategories([]); // Set to empty array on error
+        setCategories([]);
       }
     };
 

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { addCategory } from "../utils/api";
 
 export default function AddCategory() {
   const navigate = useNavigate();
@@ -16,11 +16,7 @@ export default function AddCategory() {
     setSuccess(false);
 
     try {
-      const token = 
-        localStorage.getItem("accessToken") || 
-        localStorage.getItem("token") ||
-        sessionStorage.getItem("accessToken") ||
-        sessionStorage.getItem("token");
+      const token = localStorage.getItem("token");
 
       if (!token) {
         setError("Please login first");
@@ -29,18 +25,9 @@ export default function AddCategory() {
         return;
       }
 
-      const response = await axios.post(
-        "http://localhost:8000/api/v1/admin/add-category",
-        { name: categoryName },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
-          }
-        }
-      );
+      const response = await addCategory({ name: categoryName });
 
-      console.log("Category added:", response.data);
+      console.log("Category added:", response);
       setSuccess(true);
       alert("✅ Category Added Successfully!");
       setCategoryName("");

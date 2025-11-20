@@ -47,7 +47,7 @@ export const getAllProducts = async () => {
 };
 
 export const getProductById = async (id) => {
-  const response = await api.get(`/products/${id}`);
+  const response = await api.get(`/admin/products/${id}`);
   return response.data;
 };
 
@@ -76,7 +76,7 @@ export const deleteProduct = async (id) => {
 
 // ============ CATEGORY APIs ============
 export const getAllCategories = async () => {
-  const response = await api.get('/categories');
+  const response = await api.get('/admin/categories');
   return response.data;
 };
 

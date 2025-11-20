@@ -30,11 +30,11 @@ export default function Products() {
     })();
   }, [params]);
 
-  if (loading) return <div className="p-6 text-white">Loading...</div>;
-  if (error) return <div className="p-6 text-red-500">{error}</div>;
+  if (loading) return <div className="p-6 text-white bg-black min-h-screen">Loading...</div>;
+  if (error) return <div className="p-6 text-red-500 bg-black min-h-screen">{error}</div>;
 
   return (
-    <div className="p-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <div className="p-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 bg-black min-h-screen">
       {items.map((p) => {
         const url = buildProductImageUrl(p);
         if (!url) debugImage(p);
